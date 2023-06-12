@@ -100,7 +100,7 @@ class Tinebase_EmailUser_Smtp_LdapSimpleMailSchema extends Tinebase_EmailUser_Ld
     public function __construct(array $_options = array())
     {
         $config = Tinebase_EmailUser::getConfig(Tinebase_Config::SMTP);
-        if (($this->_simpleMailConfig === null) && isset($config['simplemail']) && isset($config['simplemail']['base'])) {
+        if (($this->_simpleMailConfig === []) && isset($config['simplemail']) && isset($config['simplemail']['base'])) {
             // load default values = simplemail scheme
             $this->_issetOrDefault($config['simplemail']['storage_base'], $config['simplemail']['base']);
             $this->_issetOrDefault($config['simplemail']['storage_rdn'], "cn=%u{tine20}");
