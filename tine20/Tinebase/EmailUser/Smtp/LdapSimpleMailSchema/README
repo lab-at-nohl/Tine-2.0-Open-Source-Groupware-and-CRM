@@ -2,6 +2,7 @@
                                                                   Johannes Nohl
                                                              Berlin, 2015-10-18
 
+                                           Update 2023 for 389 Directory Server
 
 ## Tine 2.0 simpleMail SMTP-Backend (LDAP) ##
 
@@ -184,6 +185,18 @@ serves the primary domain all other mail options are set by a fantasy-admin-tool
             } 
 
 
+ANNEX: Common hurdels regarding 389 Directory Server 
+
+- Different than modern openLDAP, 389-ds stores schemes in ldif-files which are 
+  located under /etc/<dirsrv> and /usr/share/<dirsrv>. They will be read in order 
+  of the filename (leading number). You cannot overwrite attributes but you can
+  reuse them in new (structural) objectClasses. Also Syntax is slightly different. 
+- 389-ds loads widely known schemes by default. Thus you cannot use those defined 
+  in 50ns-mail.ldif (mailAlternateAddress, mailForwardingAddress). However, these 
+  predefined attributes can reused (see before and file 99simpleMail.ldif). 
+- 389-ds requires plain text passwords only. They will be encrypted automatically. 
+  This applies also if you import existing {SSHA}HASHES from openLDAP. 
+
 FURTHER READINGS
 
 - Postfix' special_result_attribute http://www.postfix.org/ldap_table.5.html
@@ -192,3 +205,4 @@ FURTHER READINGS
 
 Edited 2017-10-22, small changes and typos. 
        2023-05-18, add info for 389-ds and link to cli functions. 
+       2023-12-05, added 99simplemail.ldif
